@@ -43,8 +43,12 @@ class FoodListState extends State<FoodList> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text('In-House Food')),
+      appBar: new AppBar(
+          title: new Text('In-House Food'),
+            backgroundColor: new Color(0x673AB7),
+      ),
       body: _buildFoodList(),
+      backgroundColor: Colors.lightBlue[100],
       floatingActionButton: new FloatingActionButton(
           onPressed: _pushItemFoodScreen,
           tooltip: 'Add Item',
@@ -56,7 +60,10 @@ class FoodListState extends State<FoodList> {
   void _pushItemFoodScreen() {
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
       return new Scaffold(
-          appBar: new AppBar(title: new Text('Add a new item')),
+          appBar: new AppBar(
+            title: new Text('Add a new item'),
+            backgroundColor: new Color(0x673AB7),
+          ),
           body: new TextField(
             autofocus: true,
             onSubmitted: (val) {
@@ -66,7 +73,9 @@ class FoodListState extends State<FoodList> {
             decoration: new InputDecoration(
                 hintText: 'Enter a food item...',
                 contentPadding: const EdgeInsets.all(16.0)),
-          ));
+          ),
+          backgroundColor: Colors.lightBlue[100]
+      );
     }));
   }
 }
