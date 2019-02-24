@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(new KitchenAssist());
 
-
-class KitchenAssist extends StatelessWidget{
+class KitchenAssist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -13,7 +12,7 @@ class KitchenAssist extends StatelessWidget{
   }
 }
 
-class FoodList extends StatefulWidget{
+class FoodList extends StatefulWidget {
   @override
   createState() => new FoodListState();
 }
@@ -22,7 +21,7 @@ class FoodListState extends State<FoodList> {
   List<String> _foodItems = [];
 
   void _addFoodItem(String item) {
-    if(item.length > 0){
+    if (item.length > 0) {
       setState(() => _foodItems.add(item));
     }
   }
@@ -38,50 +37,36 @@ class FoodListState extends State<FoodList> {
   }
 
   Widget _buildFoodItem(String item) {
-    return new ListTile(
-        title: new Text(item)
-    );
+    return new ListTile(title: new Text(item));
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-          title: new Text('In-House Food')
-      ),
+      appBar: new AppBar(title: new Text('In-House Food')),
       body: _buildFoodList(),
       floatingActionButton: new FloatingActionButton(
           onPressed: _pushItemFoodScreen,
           tooltip: 'Add Item',
-          child: new Icon(Icons.add)
-      ),
+          backgroundColor: Colors.black,
+          child: new Icon(Icons.add)),
     );
   }
 
   void _pushItemFoodScreen() {
-    Navigator.of(context).push(
-        new MaterialPageRoute(
-            builder: (context) {
-              return new Scaffold(
-                  appBar: new AppBar(
-                      title: new Text('Add a new item')
-                  ),
-                  body: new TextField(
-                    autofocus: true,
-                    onSubmitted: (val) {
-                      _addFoodItem(val);
-                      Navigator.pop(context);
-                    },
-                    decoration: new InputDecoration(
-                        hintText: 'Enter a food item...',
-                        contentPadding: const EdgeInsets.all(16.0)
-                    ),
-                  )
-              );
-            }
-        )
-    );
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+      return new Scaffold(
+          appBar: new AppBar(title: new Text('Add a new item')),
+          body: new TextField(
+            autofocus: true,
+            onSubmitted: (val) {
+              _addFoodItem(val);
+              Navigator.pop(context);
+            },
+            decoration: new InputDecoration(
+                hintText: 'Enter a food item...',
+                contentPadding: const EdgeInsets.all(16.0)),
+          ));
+    }));
   }
 }
-
-
