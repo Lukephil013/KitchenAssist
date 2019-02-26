@@ -19,6 +19,7 @@ class FoodList extends StatefulWidget {
 
 class FoodListState extends State<FoodList> {
   List<String> _foodItems = [];
+  TextEditingController _controller = new TextEditingController();
 
   void _addFoodItem(String item) {
     if (item.length > 0) {
@@ -26,34 +27,68 @@ class FoodListState extends State<FoodList> {
     }
   }
 
-  Widget _buildFoodList() {
-    return new ListView.builder(
-      itemBuilder: (context, index) {
-        if (index < _foodItems.length) {
-          return _buildFoodItem(_foodItems[index]);
-        }
-      },
+  Widget buildFoodList() {
+    return Flexible(
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          if (index < _foodItems.length) {
+            return buildFoodItem(_foodItems[index]);
+          }
+        },
+      ),
     );
   }
 
-  Widget _buildFoodItem(String item) {
+  Widget buildFoodItem(String item) {
     return new ListTile(title: new Text(item));
+  }
+
+  /*This Widget contains the text form to enter in a new food item to the list*/
+  Widget enterFoodItem() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Flexible(
+          child: TextField(
+            controller: _controller,
+            autofocus: false,
+            decoration: new InputDecoration(
+                hintText: 'Enter a food item...',
+                contentPadding: const EdgeInsets.all(16.0)),
+          ),
+        ),
+        RaisedButton(
+          onPressed: () {
+            _addFoodItem(_controller.value.text);
+            _controller.clear();
+          },
+          child: Text('Submit'),
+          color: Colors.amber,
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-          title: new Text('In-House Food'),
-            backgroundColor: new Color(0x673AB7),
+        title: new Text('In-House Food'),
+        backgroundColor: new Color(0x673AB7),
       ),
-      body: _buildFoodList(),
+      body: Column(
+        children: <Widget>[
+          enterFoodItem(),
+//          Padding(padding: EdgeInsets.all(16.0)),
+          buildFoodList(),
+        ],
+      ),
       backgroundColor: Colors.lightBlue[100],
-      floatingActionButton: new FloatingActionButton(
-          onPressed: _pushItemFoodScreen,
-          tooltip: 'Add Item',
-          backgroundColor: Colors.black,
-          child: new Icon(Icons.add)),
+//      floatingActionButton: new FloatingActionButton(
+//          onPressed: _pushItemFoodScreen,
+//          tooltip: 'Add Item',
+//          backgroundColor: Colors.black,
+//          child: new Icon(Icons.add)),
     );
   }
 
@@ -74,8 +109,7 @@ class FoodListState extends State<FoodList> {
                 hintText: 'Enter a food item...',
                 contentPadding: const EdgeInsets.all(16.0)),
           ),
-          backgroundColor: Colors.lightBlue[100]
-      );
+          backgroundColor: Colors.lightBlue[100]);
     }));
   }
 }
