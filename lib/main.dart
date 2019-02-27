@@ -40,7 +40,17 @@ class FoodListState extends State<FoodList> {
   }
 
   Widget buildFoodItem(String item) {
-    return new ListTile(title: new Text(item));
+    return ListTile(
+      title: new Text(item),
+      trailing: FlatButton(
+        onPressed: () {
+          setState(() {
+            _foodItems.remove(item);
+          });
+        },
+        child: Icon(Icons.clear),
+      ),
+    );
   }
 
   /*This Widget contains the text form to enter in a new food item to the list*/
