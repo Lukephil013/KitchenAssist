@@ -7,6 +7,7 @@ class KitchenAssist extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Kitchen Assist',
+      theme: ThemeData.light(),
       home: new FoodList(),
     );
   }
@@ -62,7 +63,10 @@ class FoodListState extends State<FoodList> {
           child: TextField(
             controller: _controller,
             autofocus: false,
+            textCapitalization: TextCapitalization.sentences,
             decoration: new InputDecoration(
+                fillColor: Theme.of(context).dialogBackgroundColor,
+                hintStyle: TextStyle(color: Theme.of(context).hintColor),
                 hintText: 'Enter a food item...',
                 contentPadding: const EdgeInsets.all(16.0)),
           ),
@@ -73,7 +77,7 @@ class FoodListState extends State<FoodList> {
             _controller.clear();
           },
           child: Text('Submit'),
-          color: Colors.amber,
+          color: Theme.of(context).buttonColor,
         ),
       ],
     );
@@ -83,8 +87,9 @@ class FoodListState extends State<FoodList> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        iconTheme: Theme.of(context).accentIconTheme,
         title: new Text('In-House Food'),
-        backgroundColor: new Color(0x673AB7),
+        backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: Column(
         children: <Widget>[
@@ -93,7 +98,7 @@ class FoodListState extends State<FoodList> {
           buildFoodList(),
         ],
       ),
-      backgroundColor: Colors.lightBlue[100],
+      backgroundColor: Theme.of(context).backgroundColor,
 //      floatingActionButton: new FloatingActionButton(
 //          onPressed: _pushItemFoodScreen,
 //          tooltip: 'Add Item',
