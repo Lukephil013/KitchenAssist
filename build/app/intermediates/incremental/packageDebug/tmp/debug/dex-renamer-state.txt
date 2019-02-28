@@ -1,4 +1,4 @@
-#Sun Feb 24 09:36:16 PST 2019
-base.0=C\:\\Users\\Lukep\\Desktop\\KA\\KitchenAssist\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+#Wed Feb 27 12:12:34 PST 2019
+base.0=C\:\\Users\\Robert\\AndroidStudioProjects\\KitchenAssist\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
