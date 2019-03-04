@@ -100,12 +100,61 @@ class FoodListState extends State<FoodList> {
         ],
       ),
       backgroundColor: Theme.of(context).backgroundColor,
-//      floatingActionButton: new FloatingActionButton(
-//          onPressed: _pushItemFoodScreen,
-//          tooltip: 'Add Item',
-//          backgroundColor: Colors.black,
-//          child: new Icon(Icons.add)),
+      floatingActionButton: new FloatingActionButton(
+          onPressed: (){_firestoreTest();},
+          tooltip: 'Add Item',
+          backgroundColor: Colors.black,
+          child: new Icon(Icons.add)),
     );
+  }
+
+  void _firestoreTest() {
+    TextEditingController _controller = new TextEditingController();
+
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Firestore'),
+          backgroundColor: Theme.of(context).bottomAppBarColor,
+        ),
+        body: Column(
+          children: <Widget>[
+            TextField(
+              controller: _controller,
+              autofocus: true,
+              textCapitalization: TextCapitalization.sentences,
+            ),
+            RaisedButton(
+              padding: EdgeInsets.all(1.0),
+              child: Text('Submit'),
+              color: Theme.of(context).buttonColor,
+              onPressed: () {
+                Firestore.instance
+                    .collection('Test')
+                    .document('5cK2LdvVfgmgM7EGQb6m')
+                    .updateData({
+                  'data': _controller.value.text,
+                });
+                _controller.clear();
+              },
+            ),
+            StreamBuilder(
+              stream: Firestore.instance.collection('Test').snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) return const Text('Waiting...');
+                return Text(snapshot.data.documents[0]['data']);
+              },
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.clear),
+        ),
+      );
+    }));
   }
 
   void _pushItemFoodScreen() {
