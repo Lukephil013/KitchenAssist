@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kitchen_assist/Pages/RecipePage.dart';
 import 'package:kitchen_assist/Pages/ListPage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() => runApp(new KitchenAssist());
 
