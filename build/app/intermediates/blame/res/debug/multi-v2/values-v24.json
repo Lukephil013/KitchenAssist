@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Lukep\\Desktop\\KA\\KitchenAssist\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "C:\\Users\\Robert\\AndroidStudioProjects\\KitchenAssist\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Lukep\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\35acab3bf3906a1b8cffeb5795add41f\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\Robert\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\e2977029ecb2415c894b28d892698705\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

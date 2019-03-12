@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Lukep\\Desktop\\KA\\KitchenAssist\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rIN\\values-en-rIN.xml",
+            "outputFile": "C:\\Users\\Robert\\AndroidStudioProjects\\KitchenAssist\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rIN\\values-en-rIN.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Lukep\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\8ed5a00af4acee6770203db1eea42ec7\\res\\values-en-rIN\\values-en-rIN.xml",
+                    "source": "C:\\Users\\Robert\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\e157214b53b8563407e1e7443fc44ba2\\res\\values-en-rIN\\values-en-rIN.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
