@@ -21,7 +21,7 @@ class listPageState extends State<listPage> {
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       floatingActionButton: new FloatingActionButton(
-          onPressed: (){_firestoreTest();},
+          onPressed: _firestoreTest,
           tooltip: 'Add Item',
           backgroundColor: Colors.black,
           child: new Icon(Icons.add)

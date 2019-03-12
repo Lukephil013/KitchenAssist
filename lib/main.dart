@@ -43,7 +43,7 @@ class HomePageState extends State<HomePage> {
     return new Scaffold(
       appBar: new AppBar(
         iconTheme: Theme.of(context).accentIconTheme,
-        title: new Text('In-House Food'),
+        title: new Text('Kitchen Assist'),
         backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: currentPage,
