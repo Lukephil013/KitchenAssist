@@ -1,11 +1,88 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 
-class recipePage extends StatelessWidget{
+class recipePage extends StatefulWidget {
+  @override
+  createState() => recipePageState();
+}
+
+class recipePageState extends State<recipePage> {
+  final String url = "https://swapi.co/api/starships";
+  List data;
+
+  Future<String> getSWData() async {
+    var res =
+    await http.get(Uri.parse(url), headers: {"Accept": "application/json"});
+
+    setState(() {
+      var resBody = json.decode(res.body);
+      data = resBody["results"];
+    });
+
+    return "Success!";
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container(
-      color: Colors.blue,
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: data == null ? 0 : data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Card(
+                    child: Container(
+                        padding: EdgeInsets.all(15.0),
+                        child: Row(
+                          children: <Widget>[
+                            Text("Name: "),
+                            Text(data[index]["name"],
+                                style: TextStyle(
+                                    fontSize: 18.0, color: Colors.black87)),
+                          ],
+                        )),
+                  ),
+                  Card(
+                    child: Container(
+                        padding: EdgeInsets.all(15.0),
+                        child: Row(
+                          children: <Widget>[
+                            Text("Model: "),
+                            Text(data[index]["model"],
+                                style: TextStyle(
+                                    fontSize: 18.0, color: Colors.red)),
+                          ],
+                        )),
+                  ),
+                  Card(
+                    child: Container(
+                        padding: EdgeInsets.all(15.0),
+                        child: Row(
+                          children: <Widget>[
+                            Text("Cargo Capacity: "),
+                            Text(data[index]["cargo_capacity"],
+                                style: TextStyle(
+                                    fontSize: 18.0, color: Colors.black87)),
+                          ],
+                        )),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.getSWData();
   }
 }
