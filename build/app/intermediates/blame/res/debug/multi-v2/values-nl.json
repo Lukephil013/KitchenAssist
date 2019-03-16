@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/migueldelatorre/StudioProjects/KitchenAssist/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-nl/values-nl.xml",
+            "outputFile": "C:\\Users\\Daniel\\AndroidStudioProjects\\KitchenAssist\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-nl\\values-nl.xml",
             "map": [
                 {
-                    "source": "/Users/migueldelatorre/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/9ed48afc2fbaa95a1cc760fe8dc3c9fd/res/values-nl/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "245,353,540,668,777,1003,1128,1277,1408,1645,1749,1949,2073,2295,2503,2597,2686",
-                        "endColumns": "107,186,127,108,225,124,148,130,236,103,199,123,221,207,93,88,103",
-                        "endOffsets": "352,539,667,776,1002,1127,1276,1407,1644,1748,1948,2072,2294,2502,2596,2685,2789"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,217,404,536,649,875,1004,1157,1494,1731,1839,2039,2167,2389,2601,2699,2792",
-                        "endColumns": "111,186,131,112,225,128,152,134,236,107,199,127,221,211,97,92,107",
-                        "endOffsets": "212,399,531,644,870,999,1152,1287,1726,1834,2034,2162,2384,2596,2694,2787,2895"
-                    }
-                },
-                {
-                    "source": "/Users/migueldelatorre/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/c03dffa84e13c683c1ca977fa1f001cb/res/values-nl/values-nl.xml",
+                    "source": "C:\\Users\\Daniel\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\8f98fe9013275d789e0f376a27073f91\\res\\values-nl\\values-nl.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -38,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "/Users/migueldelatorre/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/fc8d2bdb6fd4867e926bea654647ad56/res/values-nl/values.xml",
+                    "source": "C:\\Users\\Daniel\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-16.0.1.aar\\574e078157deca84c01fb208941b2ffa\\res\\values-nl\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "245,353,540,668,777,1003,1128,1277,1408,1645,1749,1949,2073,2295,2503,2597,2686",
+                        "endColumns": "107,186,127,108,225,124,148,130,236,103,199,123,221,207,93,88,103",
+                        "endOffsets": "352,539,667,776,1002,1127,1276,1407,1644,1748,1948,2072,2294,2502,2596,2685,2789"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,217,404,536,649,875,1004,1157,1494,1731,1839,2039,2167,2389,2601,2699,2792",
+                        "endColumns": "111,186,131,112,225,128,152,134,236,107,199,127,221,211,97,92,107",
+                        "endOffsets": "212,399,531,644,870,999,1152,1287,1726,1834,2034,2162,2384,2596,2694,2787,2895"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Daniel\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-16.0.1.aar\\c1ee2ea59e1c8585f5a2a37ab62e3e75\\res\\values-nl\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",

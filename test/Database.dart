@@ -3,5 +3,5 @@ class DBProvider{
   static final DBProvider db = DBProvider._();
 }
 
-static Database _database;
+//static Database _database;
 

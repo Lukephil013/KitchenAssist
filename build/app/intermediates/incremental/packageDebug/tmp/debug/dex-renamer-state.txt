@@ -1,4 +1,4 @@
-#Tue Mar 12 17:30:14 PDT 2019
-base.0=/Users/migueldelatorre/StudioProjects/KitchenAssist/build/app/intermediates/transforms/dexMerger/debug/0
+#Fri Mar 15 19:57:34 PDT 2019
+base.0=C\:\\Users\\Daniel\\AndroidStudioProjects\\KitchenAssist\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
