@@ -21,7 +21,7 @@ class listPageState extends State<listPage> {
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       floatingActionButton: new FloatingActionButton(
-          onPressed: (){_firestoreTest();},
+          onPressed: (){/*_firestoreTest();*/},
           tooltip: 'Add Item',
           backgroundColor: Colors.black,
           child: new Icon(Icons.add)
@@ -118,7 +118,7 @@ class listPageState extends State<listPage> {
     );
   }
 
-  void _firestoreTest() {
+  /*void _firestoreTest() {
     TextEditingController _controller = new TextEditingController();
 
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
@@ -169,5 +169,5 @@ class listPageState extends State<listPage> {
         ),
       );
     }));
-  }
+  }*/
 }
