@@ -13,7 +13,7 @@ class recipePageState extends State<recipePage> {
   List data;
 
   Future<String> getSWData() async {
-    var res =
+    var res;
     await http.get(Uri.parse(url), headers: {"Accept": "application/json"});
 
     setState(() {
