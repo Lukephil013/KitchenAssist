@@ -48,16 +48,18 @@ class Recipe {
 }
 
 // Uncomment this to connect the api
-/*Future<List<Recipe>> fetchPost() async {
+Future<List<Recipe>> fetchPost() async {
   final response =
-  await http.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=apples%2Cflour%2Csugar", headers: {"X-RapidAPI-Key": "5cdbcc2fb2msha7c9f188f095aa2p14cf70jsn62c2255d3972"});
-  //await http.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1", headers: {"X-RapidAPI-Key": "5cdbcc2fb2msha7c9f188f095aa2p14cf70jsn62c2255d3972"});
+  await http.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=apples%2Cflour%2Csugar",
+      headers: {"X-RapidAPI-Key": "5cdbcc2fb2msha7c9f188f095aa2p14cf70jsn62c2255d3972"});
 
   if (response.statusCode == 200) {
     // If the call to the server was successful, parse the JSON
-    debugPrint("loading fine");
-    debugPrint(response.body);
+    //debugPrint("loading fine");
+    //debugPrint(response.body);
 
+    print("Number of requests left: " + response.headers["x-ratelimit-requests-remaining"]);
+    print("Number of results left: " + response.headers["x-ratelimit-results-remaining"]);
 
     final recipe = RecipeFromJson(response.body);
     return recipe;
@@ -66,16 +68,16 @@ class Recipe {
     // If that call was not successful, throw an error.
     throw Exception('Failed to load post');
   }
-}*/
+}
 
 // Comment this out when you connect the api
 // This uses a local file to get the recipes so we don't go over the request limit
 // for the api
-Future<List<Recipe>> fetchPost() async {
+/*Future<List<Recipe>> fetchPost() async {
   final response = await rootBundle.loadString('assets/seacrhByIngredient.json');
   final recipe = RecipeFromJson(response);
   return recipe;
-}
+}*/
 
 class recipePage extends StatelessWidget{
   final Future<List<Recipe>> post;
