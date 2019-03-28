@@ -48,7 +48,7 @@ class Recipe {
 }
 
 // Uncomment this to connect the api
-Future<List<Recipe>> fetchPost() async {
+/*Future<List<Recipe>> fetchPost() async {
   final response =
   await http.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=apples%2Cflour%2Csugar",
       headers: {"X-RapidAPI-Key": "5cdbcc2fb2msha7c9f188f095aa2p14cf70jsn62c2255d3972"});
@@ -68,16 +68,16 @@ Future<List<Recipe>> fetchPost() async {
     // If that call was not successful, throw an error.
     throw Exception('Failed to load post');
   }
-}
+}*/
 
 // Comment this out when you connect the api
 // This uses a local file to get the recipes so we don't go over the request limit
 // for the api
-/*Future<List<Recipe>> fetchPost() async {
+Future<List<Recipe>> fetchPost() async {
   final response = await rootBundle.loadString('assets/seacrhByIngredient.json');
   final recipe = RecipeFromJson(response);
   return recipe;
-}*/
+}
 
 class recipePage extends StatelessWidget{
   final Future<List<Recipe>> post;
