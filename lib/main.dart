@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:google_sign_in/google_sign_in.dart';
+//import 'dart:async';
 import 'package:kitchen_assist/Pages/RecipePage.dart';
 import 'package:kitchen_assist/Pages/ListPage.dart';
+import 'package:flutter/foundation.dart';
 
 void main() => runApp(new KitchenAssist());
 
 class KitchenAssist extends StatelessWidget {
+//code written to sign in
+
+//final FirebaseAuth _auth = FirebaseAuth.instance;
+//final GoogleSignIn googleSignIn = new GoogleSignIn();
+
+/*Future<FirebaseUser> _signIn() async{
+  GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+  GoogleSignInAuthentication gSA = await googleSignInAccount.authentication;
+
+  FirebaseUser user = await _auth.signInWithGoogle(
+    idToken: gSA.idToken, accessToken: gSA.accessToken);
+  print("User Name : ${user.displayName}");
+  return user;
+}*/
+
+/*void _signOut(){
+  googleSignIn.signOut();
+  print("User Signed out");
+}*/
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -32,8 +56,7 @@ class HomePageState extends State<HomePage> {
 
   void initState(){
     page1 = listPage();
-    page2 = recipePage();
-
+    page2 = recipePage(post: fetchPost());
     pages = [page1, page2];
     currentPage = page1;
     super.initState();

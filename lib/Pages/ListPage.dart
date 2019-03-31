@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
+import 'package:kitchen_assist/Models/Food.dart';
+import 'package:kitchen_assist/utils/database_helper.dart';
+import 'package:sqflite/sqflite.dart';
 
 class listPage extends StatefulWidget{
+
   @override
   createState() => new listPageState();
 }
@@ -9,9 +13,16 @@ class listPage extends StatefulWidget{
 class listPageState extends State<listPage> {
   List<String> _foodItems = [];
 
+  DatabaseHelper databaseHelper = DatabaseHelper();
+  List<Food> foodList;
+  int count = 0;
+
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    if(foodList == null){
+      foodList = List<Food>();
+    }
     return Scaffold(
       body: Column(
           children: <Widget>[
@@ -21,7 +32,7 @@ class listPageState extends State<listPage> {
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       floatingActionButton: new FloatingActionButton(
-          onPressed: (){_firestoreTest();},
+          onPressed: (){/*_firestoreTest();*/},
           tooltip: 'Add Item',
           backgroundColor: Colors.black,
           child: new Icon(Icons.add)
@@ -117,57 +128,9 @@ class listPageState extends State<listPage> {
       ],
     );
   }
-
-  void _firestoreTest() {
-    TextEditingController _controller = new TextEditingController();
-
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Firestore'),
-          backgroundColor: Theme
-              .of(context)
-              .bottomAppBarColor,
-        ),
-        body: Column(
-          children: <Widget>[
-            TextField(
-              controller: _controller,
-              autofocus: true,
-              textCapitalization: TextCapitalization.sentences,
-            ),
-            RaisedButton(
-              padding: EdgeInsets.all(1.0),
-              child: Text('Submit'),
-              color: Theme
-                  .of(context)
-                  .buttonColor,
-              onPressed: () {
-                Firestore.instance
-                    .collection('Test')
-                    .document('5cK2LdvVfgmgM7EGQb6m')
-                    .updateData({
-                  'data': _controller.value.text,
-                });
-                _controller.clear();
-              },
-            ),
-            StreamBuilder(
-              stream: Firestore.instance.collection('Test').snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) return const Text('Waiting...');
-                return Text(snapshot.data.documents[0]['data']);
-              },
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Icon(Icons.clear),
-        ),
-      );
-    }));
+  void _insert(Food food) async{
+    //int result = await databaseHelper.insertItem(food);
   }
 }
+
+//need to test database

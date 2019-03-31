@@ -1,4 +1,0 @@
-#Sun Feb 24 09:33:29 PST 2019
-base.0=C\:\\Users\\Lukep\\Desktop\\KA\\KitchenAssist\\build\\app\\intermediates\\transforms\\dexMerger\\release\\0
-path.0=classes.dex
-renamed.0=classes.dex
