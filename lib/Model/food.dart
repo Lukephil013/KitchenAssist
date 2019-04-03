@@ -6,7 +6,7 @@ class Food {
   String _date;
   int _priority;
 
-  Food(this._title, this._date, this._priority, [this._description]);
+  Food(this._title);
 
   Food.withId(this._id, this._title, this._date, this._priority, [this._description]);
 

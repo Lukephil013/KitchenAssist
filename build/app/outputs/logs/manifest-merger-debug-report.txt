@@ -4,6 +4,8 @@ ADDED from C:\Users\Lukep\Desktop\KA\KitchenAssist\android\app\src\main\AndroidM
 INJECTED from C:\Users\Lukep\Desktop\KA\KitchenAssist\android\app\src\main\AndroidManifest.xml:1:1-39:12
 INJECTED from C:\Users\Lukep\Desktop\KA\KitchenAssist\android\app\src\main\AndroidManifest.xml:1:1-39:12
 INJECTED from C:\Users\Lukep\Desktop\KA\KitchenAssist\android\app\src\main\AndroidManifest.xml:1:1-39:12
+MERGED from [:sqflite] C:\Users\Lukep\Desktop\KA\KitchenAssist\build\sqflite\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-7:12
+MERGED from [:path_provider] C:\Users\Lukep\Desktop\KA\KitchenAssist\build\path_provider\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-7:12
 MERGED from [:cloud_firestore] C:\Users\Lukep\Desktop\KA\KitchenAssist\build\cloud_firestore\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-7:12
 MERGED from [:firebase_core] C:\Users\Lukep\Desktop\KA\KitchenAssist\build\firebase_core\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-core:16.0.4] C:\Users\Lukep\.gradle\caches\transforms-1\files-1.1\firebase-core-16.0.4.aar\389da9b82accbf01056c75534c104589\AndroidManifest.xml:2:1-9:12
@@ -151,6 +153,10 @@ uses-sdk
 INJECTED from C:\Users\Lukep\Desktop\KA\KitchenAssist\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Lukep\Desktop\KA\KitchenAssist\android\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\Lukep\Desktop\KA\KitchenAssist\android\app\src\main\AndroidManifest.xml
+MERGED from [:sqflite] C:\Users\Lukep\Desktop\KA\KitchenAssist\build\sqflite\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] C:\Users\Lukep\Desktop\KA\KitchenAssist\build\sqflite\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] C:\Users\Lukep\Desktop\KA\KitchenAssist\build\path_provider\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] C:\Users\Lukep\Desktop\KA\KitchenAssist\build\path_provider\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
 MERGED from [:cloud_firestore] C:\Users\Lukep\Desktop\KA\KitchenAssist\build\cloud_firestore\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
 MERGED from [:cloud_firestore] C:\Users\Lukep\Desktop\KA\KitchenAssist\build\cloud_firestore\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] C:\Users\Lukep\Desktop\KA\KitchenAssist\build\firebase_core\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44

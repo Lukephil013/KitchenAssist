@@ -6,8 +6,8 @@ import 'package:kitchen_assist/Model/food.dart';
 
 class DatabaseHelper {
 
-  static DatabaseHelper _databaseHelper;    // Singleton DatabaseHelper
-  static Database _database;                // Singleton Database
+  static DatabaseHelper _databaseHelper; // Singleton DatabaseHelper
+  static Database _database; // Singleton Database
 
   String foodTable = 'food_table';
   String colId = 'id';
@@ -19,15 +19,14 @@ class DatabaseHelper {
   DatabaseHelper._createInstance(); // Named constructor to create instance of DatabaseHelper
 
   factory DatabaseHelper() {
-
     if (_databaseHelper == null) {
-      _databaseHelper = DatabaseHelper._createInstance(); // This is executed only once, singleton object
+      _databaseHelper = DatabaseHelper
+          ._createInstance(); // This is executed only once, singleton object
     }
     return _databaseHelper;
   }
 
   Future<Database> get database async {
-
     if (_database == null) {
       _database = await initializeDatabase();
     }
@@ -40,14 +39,15 @@ class DatabaseHelper {
     String path = directory.path + 'foods.db';
 
     // Open/create the database at a given path
-    var foodDatabase = await openDatabase(path, version: 1, onCreate: _createDb);
+    var foodDatabase = await openDatabase(
+        path, version: 1, onCreate: _createDb);
     return foodDatabase;
   }
 
   void _createDb(Database db, int newVersion) async {
-
-    await db.execute('CREATE TABLE $foodTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colTitle TEXT, '
-        '$colDescription TEXT, $colPriority INTEGER, $colDate TEXT)');
+    await db.execute(
+        'CREATE TABLE $foodTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colTitle TEXT, '
+            '$colDescription TEXT, $colPriority INTEGER, $colDate TEXT)');
   }
 
   Future<List<Map<String, dynamic>>> getFoodMapList() async {
@@ -65,12 +65,28 @@ class DatabaseHelper {
 
   Future<int> updateFood(Food food) async {
     var db = await this.database;
-    var result = await db.update(foodTable, food.toMap(), where: '$colId = ?', whereArgs: [food.id]);
+    var result = await db.update(
+        foodTable, food.toMap(), where: '$colId = ?', whereArgs: [food.id]);
     return result;
   }
 
   Future<int> deleteFood(int id) async {
     var db = await this.database;
-    int result = await db.rawDelete('DELETE FROM $foodTable WHERE $colId = $id');
+    int result = await db.rawDelete(
+        'DELETE FROM $foodTable WHERE $colId = $id');
     return result;
   }
+
+  Future<List<Food>> getFoodList() async{
+    var foodMapList = await getFoodMapList();
+    int count = foodMapList.length;
+    List<Food> foodList = List<Food>();
+
+    for(int i = 0; i < count; i++){
+      foodList.add(Food.fromMapObject(foodMapList[i]));
+    }
+    return foodList;
+  }
+
+
+}

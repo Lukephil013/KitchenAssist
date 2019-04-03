@@ -1,5 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kitchen_assist/Utils/database_helper.dart';
+import 'package:kitchen_assist/Model/food.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:intl/intl.dart';
 
 class listPage extends StatefulWidget{
   @override
@@ -7,11 +11,19 @@ class listPage extends StatefulWidget{
 }
 
 class listPageState extends State<listPage> {
-  List<String> _foodItems = [];
+  List<Food> _foodItems = [];
+  Food food;
+  DatabaseHelper databaseHelper = DatabaseHelper();
+  int count = 0;
+
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    if(_foodItems == null){
+      _foodItems = List<Food>();
+     // updateListView();
+    }
     return Scaffold(
       body: Column(
           children: <Widget>[
@@ -19,22 +31,19 @@ class listPageState extends State<listPage> {
             buildFoodList(),
           ]
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
-      floatingActionButton: new FloatingActionButton(
-          onPressed: _firestoreTest,
-          tooltip: 'Add Item',
-          backgroundColor: Colors.black,
-          child: new Icon(Icons.add)
-      ),
+       backgroundColor: Theme.of(context).backgroundColor,
+//      floatingActionButton: new FloatingActionButton(
+//          tooltip: 'Add Item',
+//          backgroundColor: Colors.black,
+//          child: new Icon(Icons.add)
+//      ),
     );
   }
 
   TextEditingController _controller = new TextEditingController();
 
-  void _addFoodItem(String item) {
-    if (item.length > 0) {
-      setState(() => _foodItems.add(item));
-    }
+  void _addFoodItem(Food item) {
+      setState(() => _foodItems.add(item)); //adding food item to array. get it to display name
   }
 
   Widget buildFoodList() {
@@ -42,12 +51,13 @@ class listPageState extends State<listPage> {
       child: ListView.builder(
         itemBuilder: (context, index) {
           if (index < _foodItems.length) {
-            return buildFoodItem(_foodItems[index]);
+            return buildFoodItem(_foodItems[index].title);
           }
         },
       ),
     );
   }
+
 
   Widget buildFoodItem(String item) {
     return ListTile(
@@ -61,27 +71,6 @@ class listPageState extends State<listPage> {
         child: Icon(Icons.clear),
       ),
     );
-  }
-
-  void _pushItemFoodScreen() {
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      return new Scaffold(
-          appBar: new AppBar(
-            title: new Text('Add a new item'),
-            backgroundColor: new Color(0x673AB7),
-          ),
-          body: new TextField(
-            autofocus: true,
-            onSubmitted: (val) {
-              _addFoodItem(val);
-              Navigator.pop(context);
-            },
-            decoration: new InputDecoration(
-                hintText: 'Enter a food item...',
-                contentPadding: const EdgeInsets.all(16.0)),
-          ),
-          backgroundColor: Colors.lightBlue[100]);
-    }));
   }
 
   Widget enterFoodItem() {
@@ -106,7 +95,9 @@ class listPageState extends State<listPage> {
         ),
         RaisedButton(
           onPressed: () {
-            _addFoodItem(_controller.value.text);
+            var foodObj = new Food(_controller.value.text);
+            _addFoodItem(foodObj);
+            _save(foodObj);
             _controller.clear();
           },
           child: Text('Submit'),
@@ -118,56 +109,47 @@ class listPageState extends State<listPage> {
     );
   }
 
-  void _firestoreTest() {
-    TextEditingController _controller = new TextEditingController();
 
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Firestore'),
-          backgroundColor: Theme
-              .of(context)
-              .bottomAppBarColor,
-        ),
-        body: Column(
-          children: <Widget>[
-            TextField(
-              controller: _controller,
-              autofocus: true,
-              textCapitalization: TextCapitalization.sentences,
-            ),
-            RaisedButton(
-              padding: EdgeInsets.all(1.0),
-              child: Text('Submit'),
-              color: Theme
-                  .of(context)
-                  .buttonColor,
-              onPressed: () {
-                Firestore.instance
-                    .collection('Test')
-                    .document('5cK2LdvVfgmgM7EGQb6m')
-                    .updateData({
-                  'data': _controller.value.text,
-                });
-                _controller.clear();
-              },
-            ),
-            StreamBuilder(
-              stream: Firestore.instance.collection('Test').snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) return const Text('Waiting...');
-                return Text(snapshot.data.documents[0]['data']);
-              },
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Icon(Icons.clear),
-        ),
-      );
-    }));
+  void _save(Food food) async{
+    int result;
+    food.date = DateFormat.yMMMd().format(DateTime.now());
+    if(food.id != null){
+      result = await databaseHelper.updateFood(food);
+      print(food.id);
+    }
+      else{
+      result = await databaseHelper.insertFood(food);
+      print(food.title);
+    }
+    if(result != 0){
+      _showAlertDialog('Status', 'Item Saved Successfully');
+    }
+    else{
+      _showAlertDialog('Status', 'Problem saving item.');
+    }
+  }
+
+  void _showAlertDialog(String title, String message){
+    AlertDialog alertDialog = AlertDialog(
+      title: Text(title),
+      content: Text(message),
+    );
+    showDialog(
+      context: context,
+      builder: (_) => alertDialog
+    );
+  }
+
+  void updateListView(){
+    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
+    dbFuture.then((database){
+      Future<List<Food>> foodListFuture = databaseHelper.getFoodList();
+      foodListFuture.then((_foodItems){
+        setState(() {
+          this._foodItems = _foodItems;
+          this.count = _foodItems.length;
+        });
+      });
+    });
   }
 }
