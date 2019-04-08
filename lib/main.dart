@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kitchen_assist/Pages/RecipePage.dart';
 import 'package:kitchen_assist/Pages/ListPage.dart';
+import 'package:kitchen_assist/Pages/loginPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 void main() => runApp(new KitchenAssist());
 
@@ -23,6 +27,7 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   /*This Widget contains the text form to enter in a new food item to the list*/
   int currentTab = 0;
+  loginPage page3;
   listPage page1;
   recipePage page2;
   List<Widget> pages;
@@ -33,9 +38,10 @@ class HomePageState extends State<HomePage> {
   void initState(){
     page1 = listPage();
     page2 = recipePage();
+    page3 = loginPage();
 
-    pages = [page1, page2];
-    currentPage = page1;
+    pages = [page1, page2, page3];
+    currentPage = page3;
     super.initState();
   }
 
