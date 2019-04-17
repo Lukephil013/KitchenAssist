@@ -1,38 +1,54 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:kitchen_assist/Utils/database_helper.dart';
-import 'package:kitchen_assist/Model/food.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:intl/intl.dart';
+import 'package:kitchen_assist/authprovider.dart';
+import 'package:kitchen_assist/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class listPage extends StatefulWidget{
+
+class ListPage extends StatefulWidget {
+  const ListPage({this.onSignedOut});
+  final VoidCallback onSignedOut;
+
   @override
-  createState() => new listPageState();
+  createState() => new ListPageState();
 }
+  class ListPageState extends State<ListPage>{
+    BaseAuth auth;
+    Future<void> _signOut(BuildContext context) async {
 
-class listPageState extends State<listPage> {
-  List<Food> _foodItems = [];
-  Food food;
-  DatabaseHelper databaseHelper = DatabaseHelper();
-  int count = 0;
+      try {
+        final BaseAuth auth = AuthProvider.of(context).auth;
+        await auth.signOut();
+        widget.onSignedOut();
+      } catch (e) {
+        print(e);
+      }
+    }
 
 
+  List<String> _foodItems = [];
+  TextEditingController _controller = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    if(_foodItems == null){
-      _foodItems = List<Food>();
-     // updateListView();
-    }
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Kitchen Assist'),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Logout', style: TextStyle(fontSize: 17.0, color: Colors.white)),
+              onPressed: () => _signOut(context),
+          )
+        ],
+      ),
       body: Column(
           children: <Widget>[
             enterFoodItem(),
             buildFoodList(),
           ]
       ),
-       backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).backgroundColor,
 //      floatingActionButton: new FloatingActionButton(
+//          onPressed: (){_firestoreTest();},
 //          tooltip: 'Add Item',
 //          backgroundColor: Colors.black,
 //          child: new Icon(Icons.add)
@@ -40,38 +56,7 @@ class listPageState extends State<listPage> {
     );
   }
 
-  TextEditingController _controller = new TextEditingController();
 
-  void _addFoodItem(Food item) {
-      setState(() => _foodItems.add(item)); //adding food item to array. get it to display name
-  }
-
-  Widget buildFoodList() {
-    return Flexible(
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          if (index < _foodItems.length) {
-            return buildFoodItem(_foodItems[index].title);
-          }
-        },
-      ),
-    );
-  }
-
-
-  Widget buildFoodItem(String item) {
-    return ListTile(
-      title: new Text(item),
-      trailing: FlatButton(
-        onPressed: () {
-          setState(() {
-            _foodItems.remove(item);
-          });
-        },
-        child: Icon(Icons.clear),
-      ),
-    );
-  }
 
   Widget enterFoodItem() {
     return Row(
@@ -95,9 +80,13 @@ class listPageState extends State<listPage> {
         ),
         RaisedButton(
           onPressed: () {
-            var foodObj = new Food(_controller.value.text);
-            _addFoodItem(foodObj);
-            _save(foodObj);
+            Firestore.instance
+                    .collection('Test')
+                    .document('5cK2LdvVfgmgM7EGQb6m')
+                    .updateData({
+                  'data': _controller.value.text,
+                });
+            _addFoodItem(_controller.value.text);
             _controller.clear();
           },
           child: Text('Submit'),
@@ -109,47 +98,108 @@ class listPageState extends State<listPage> {
     );
   }
 
-
-  void _save(Food food) async{
-    int result;
-    food.date = DateFormat.yMMMd().format(DateTime.now());
-    if(food.id != null){
-      result = await databaseHelper.updateFood(food);
-      print(food.id);
-    }
-      else{
-      result = await databaseHelper.insertFood(food);
-      print(food.title);
-    }
-    if(result != 0){
-      _showAlertDialog('Status', 'Item Saved Successfully');
-    }
-    else{
-      _showAlertDialog('Status', 'Problem saving item.');
+  void _addFoodItem(String item) {
+    if (item.length > 0) {
+      setState(() => _foodItems.add(item));
     }
   }
 
-  void _showAlertDialog(String title, String message){
-    AlertDialog alertDialog = AlertDialog(
-      title: Text(title),
-      content: Text(message),
-    );
-    showDialog(
-      context: context,
-      builder: (_) => alertDialog
+
+  Widget buildFoodList() {
+    return Flexible(
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          if (index < _foodItems.length) {
+            return buildFoodItem(_foodItems[index]);
+          }
+        },
+      ),
     );
   }
 
-  void updateListView(){
-    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
-    dbFuture.then((database){
-      Future<List<Food>> foodListFuture = databaseHelper.getFoodList();
-      foodListFuture.then((_foodItems){
-        setState(() {
-          this._foodItems = _foodItems;
-          this.count = _foodItems.length;
-        });
-      });
-    });
+  Widget buildFoodItem(String item) {
+    return ListTile(
+      title: new Text(item),
+      trailing: FlatButton(
+        onPressed: () {
+          setState(() {
+            _foodItems.remove(item);
+          });
+        },
+        child: Icon(Icons.clear),
+      ),
+    );
   }
-}
+
+  void _pushItemFoodScreen() {
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+      return new Scaffold(
+          appBar: new AppBar(
+            title: new Text('Add a new item'),
+            backgroundColor: new Color(0x673AB7),
+          ),
+          body: new TextField(
+            autofocus: true,
+            onSubmitted: (val) {
+              _addFoodItem(val);
+              Navigator.pop(context);
+            },
+            decoration: new InputDecoration(
+                hintText: 'Enter a food item...',
+                contentPadding: const EdgeInsets.all(16.0)),
+          ),
+          backgroundColor: Colors.lightBlue[100]);
+    }));
+  }
+//  void _firestoreTest() {
+//    TextEditingController _controller = new TextEditingController();
+//    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+//      return Scaffold(
+//        appBar: AppBar(
+//          title: Text('Firestore'),
+//          backgroundColor: Theme
+//              .of(context)
+//              .bottomAppBarColor,
+//        ),
+//        body: Column(
+//          children: <Widget>[
+//            TextField(
+//              controller: _controller,
+//              autofocus: true,
+//              textCapitalization: TextCapitalization.sentences,
+//            ),
+//            RaisedButton(
+//              padding: EdgeInsets.all(1.0),
+//              child: Text('Submit'),
+//              color: Theme
+//                  .of(context)
+//                  .buttonColor,
+//              onPressed: () {
+//                Firestore.instance
+//                    .collection('Test')
+//                    .document('5cK2LdvVfgmgM7EGQb6m')
+//                    .updateData({
+//                  'data': _controller.value.text,
+//                });
+//                _controller.clear();
+//              },
+//            ),
+//            StreamBuilder(
+//              stream: Firestore.instance.collection('Test').snapshots(),
+//              builder: (context, snapshot) {
+//                if (!snapshot.hasData) return const Text('Waiting...');
+//                return Text(snapshot.data.documents[0]['data']);
+//              },
+//            ),
+//          ],
+//        ),
+//        floatingActionButton: FloatingActionButton(
+//          onPressed: () {
+//            Navigator.pop(context);
+//          },
+//          child: Icon(Icons.clear),
+//        ),
+//      );
+//    }));
+//  }
+  }
