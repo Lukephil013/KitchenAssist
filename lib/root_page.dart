@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kitchen_assist/auth.dart';
 import 'package:kitchen_assist/Pages/loginPage.dart';
-import 'package:kitchen_assist/Pages/ListPage.dart';
+import 'package:kitchen_assist/Pages/nav.dart';
 import 'package:kitchen_assist/authprovider.dart';
 
 
@@ -52,7 +52,7 @@ class _RootPageState extends State<RootPage> {
           onSignedIn: _signedIn,
         );
       case AuthStatus.signedIn:
-        return ListPage(
+        return HomePage(
           onSignedOut: _signedOut,
         );
     }
@@ -61,10 +61,7 @@ class _RootPageState extends State<RootPage> {
 
   Widget _buildWaitingScreen() {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: CircularProgressIndicator(),
-      ),
+      body: Text('dawd'),
     );
   }
 }

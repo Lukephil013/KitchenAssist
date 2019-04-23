@@ -47,7 +47,13 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   # assets:
   assets:
-  - assets/seacrhByIngredient.json
+    - assets/seacrhByIngredient.json
+    - assets/639487.json
+    - assets/641803.json
+    - assets/643426.json
+    - assets/645152.json
+    - assets/657563.json
+    - assets/complexSearch.json
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kitchen_assist/authprovider.dart';
 import 'package:kitchen_assist/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:kitchen_assist/Pages/RecipePage.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({this.onSignedOut});
@@ -13,6 +13,12 @@ class ListPage extends StatefulWidget {
   createState() => new ListPageState();
 }
   class ListPageState extends State<ListPage>{
+    int currentTab = 0;
+    ListPage page1;
+    recipePage page2;
+    List<Widget> pages;
+    Widget currentPage;
+
     BaseAuth auth;
     Future<void> _signOut(BuildContext context) async {
 
@@ -29,32 +35,27 @@ class ListPage extends StatefulWidget {
   List<String> _foodItems = [];
   TextEditingController _controller = new TextEditingController();
   @override
+
+  void initState(){
+    page1 = ListPage();
+    page2 = recipePage(post: fetchPost());
+    pages = [page1, page2];
+    currentPage = page1;
+    super.initState();
+  }
+
+
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Kitchen Assist'),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Logout', style: TextStyle(fontSize: 17.0, color: Colors.white)),
-              onPressed: () => _signOut(context),
-          )
-        ],
-      ),
-      body: Column(
+      body: Column( //maybe make new class
           children: <Widget>[
             enterFoodItem(),
             buildFoodList(),
           ]
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
-//      floatingActionButton: new FloatingActionButton(
-//          onPressed: (){_firestoreTest();},
-//          tooltip: 'Add Item',
-//          backgroundColor: Colors.black,
-//          child: new Icon(Icons.add)
-//      ),
     );
   }
+
 
 
 
@@ -82,7 +83,7 @@ class ListPage extends StatefulWidget {
           onPressed: () {
             Firestore.instance
                     .collection('Test')
-                    .document('5cK2LdvVfgmgM7EGQb6m')
+                    .document('5cK2LdvVfgmgM7EGQb6m')//user id
                     .updateData({
                   'data': _controller.value.text,
                 });
