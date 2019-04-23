@@ -1,39 +1,37 @@
 {
   "project_info": {
-    "project_number": "170164672987",
-    "firebase_url": "https://kitchen-assist.firebaseio.com",
-    "project_id": "kitchen-assist",
-    "storage_bucket": "kitchen-assist.appspot.com"
+    "project_number": "519996473565",
+    "firebase_url": "https://kitchenassist.firebaseio.com",
+    "project_id": "kitchenassist",
+    "storage_bucket": "kitchenassist.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:170164672987:android:45fcd2d7824b249e",
+        "mobilesdk_app_id": "1:519996473565:android:45fcd2d7824b249e",
         "android_client_info": {
           "package_name": "com.example.kitchenassist"
         }
       },
       "oauth_client": [
         {
-          "client_id": "170164672987-ogsnog62b2lh18psk1g5kf9app4mb7l1.apps.googleusercontent.com",
+          "client_id": "519996473565-lobtc813cnhb3s5jflb3bqv8m8g833t4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDJguoF7Y-_Hnuuy4ODb4k30zQyFQMW0mo"
+          "current_key": "AIzaSyBDi4pOcbZeTcZJaO7BRbBWr-NCindRTcg"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519996473565-lobtc813cnhb3s5jflb3bqv8m8g833t4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
